@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  OpetNet.ui.site:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+  OpetNet.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

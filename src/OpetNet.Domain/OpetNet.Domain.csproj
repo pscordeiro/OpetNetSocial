@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>OpetNet.Domain</AssemblyName>
+    <PackageId>OpetNet.Domain</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpetNet.Domain.Core\OpetNet.Domain.Core.csproj" />
+    <ProjectReference Include="..\OpetNet.DomainEvents\OpetNet.Domain.Events.csproj" />
+    <ProjectReference Include="..\OpetNet.Infra.CrossCutting.Bus\OpetNet.Infra.CrossCutting.Bus.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.5.2" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="SharedKernel.DomainEvents.Core" Version="2.1.0" />
+    <PackageReference Include="SharedKernel.DomainEvents.CrossDomainEvents" Version="2.4.0" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
+    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

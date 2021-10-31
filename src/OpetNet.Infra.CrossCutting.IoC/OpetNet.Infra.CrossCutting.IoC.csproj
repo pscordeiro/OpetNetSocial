@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>OpetNet.Infra.CrossCutting.IoC</AssemblyName>
+    <PackageId>OpetNet.Infra.CrossCutting.IoC</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpetNet.Application\OpetNet.Application.csproj" />
+    <ProjectReference Include="..\OpetNet.Domain\OpetNet.Domain.csproj" />
+    <ProjectReference Include="..\OpetNet.Infra.CrossCutting.Identity\OpetNet.Infra.CrossCutting.Identity.csproj" />
+    <ProjectReference Include="..\OpetNet.Infra.Data\OpetNet.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+    <PackageReference Include="SharedKernel.DomainEvents.CrossDomainEvents" Version="2.4.0" />
+    <PackageReference Include="SharedKernel.Logger" Version="1.0.23" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SharedKernel.DomainEvents.CrossDomainEvents">
+      <HintPath>..\..\..\..\..\.nuget\packages\sharedkernel.domainevents.crossdomainevents\1.2.16\lib\netstandard2.0\SharedKernel.DomainEvents.CrossDomainEvents.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

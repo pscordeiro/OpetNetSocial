@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  OpetNet.ui.site:
+    image: ${DOCKER_REGISTRY}caquitemplateuisite
+    build:
+      context: src
+      dockerfile: src/OpetNet.UI.Site/Dockerfile
+
+  OpetNet.webapi:
+    image: ${DOCKER_REGISTRY}caquitemplatewebapi
+    build:
+      context: src
+      dockerfile: OpetNet.WebApi/Dockerfile
+

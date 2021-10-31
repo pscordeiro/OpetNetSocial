@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  OpetNet.ui.site:
+    image: ${DOCKER_REGISTRY}caquitemplateuisite
+    build:
+      context: .
+      dockerfile: OpetNet.UI.Site/Dockerfile
+
+  OpetNet.webapi:
+    image: ${DOCKER_REGISTRY}caquitemplatewebapi
+    build:
+      context: .
+      dockerfile: OpetNet.WebApi/Dockerfile
+
+
+
+	  version: '3.4'
+
+services:
+  OpetNet.ui.site:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "10000"
+
+  OpetNet.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "10050"
+

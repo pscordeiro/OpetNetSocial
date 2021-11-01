@@ -36,7 +36,8 @@ namespace OpetNet.Domain.CommandHandlers
                 return Unit.Value;
             }
 
-            var customer = new Customer(Guid.NewGuid(), message.Name, message.Email, message.BirthDate);
+            //deixeiquieto pq tem 0 referencia no metodo
+            var customer = new Customer(Guid.NewGuid(), message.Name, message.Email, message.BirthDate, "veja isso aqui");
 
             if (_customerRepository.GetByEmail(customer.Email) != null)
             {
@@ -59,7 +60,7 @@ namespace OpetNet.Domain.CommandHandlers
                 return Unit.Task;
             }
 
-            var customer = new Customer(message.Id, message.Name, message.Email, message.BirthDate);
+            var customer = new Customer(message.Id, message.Name, message.Email, message.BirthDate,"veja depois isso aqui");
             var existingCustomer = _customerRepository.GetByEmail(customer.Email);
 
             if (existingCustomer != null && existingCustomer.Id != customer.Id)

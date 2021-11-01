@@ -20,6 +20,10 @@ namespace OpetNet.Application.ViewModels
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "The PassWord is Required")]
+        [DisplayName("Senha")]
+        public string PassWord { get; set; }
+
         [Required(ErrorMessage = "The BirthDate is Required")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]

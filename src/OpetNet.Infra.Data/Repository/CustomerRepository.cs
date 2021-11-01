@@ -33,10 +33,5 @@ namespace OpetNet.Infra.Data.Repository
             var customer = GetById(id);
             base.Remove(customer);
         }
-
-        public void Update(Customer customerViewModel)
-        {
-            base.Update(customerViewModel);
-        }
     }
 }

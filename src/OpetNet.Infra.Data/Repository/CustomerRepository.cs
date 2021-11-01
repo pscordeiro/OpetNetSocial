@@ -1,79 +1,42 @@
-using System;
 using OpetNet.Domain.Interfaces;
 using OpetNet.Domain.Models;
-using OpetNet.Infra.Data.UoW;
+using OpetNet.Infra.Data.Context;
+using System;
+using System.Linq;
 
 namespace OpetNet.Infra.Data.Repository
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
-        private readonly IUnitOfWorkAdo _unitOfWorkAdo;
-
-        #region Querys
-        private const string sp_get_email = @"select 'sonyluz@bne.com.br' as Email;"; 
-        #endregion
-
-        public CustomerRepository(IUnitOfWorkAdo unitOfWorkAdo)
+        public CustomerRepository(ApplicationDbContext dbContext ) : base(dbContext)
         {
-            _unitOfWorkAdo = unitOfWorkAdo;
+
         }
 
         public Customer GetByEmail(string email)
         {
-            try
-            {
-                var cmd = _unitOfWorkAdo.CreateCommand();
-                cmd.CommandText = sp_get_email;
-                string getEmail = string.Empty;
-                using (var dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        getEmail = dr["Email"].ToString();
-                    }
-                }
-                cmd.Dispose();
-
-                if (!email.Equals(getEmail))
-                {
-                    return null;
-                }
-                else
-                {
-                    return new Customer(
-                    new Guid("eff0a55f-b2d4-43fe-8830-5d615af3bd3a"),
-                    "Sony Luz",
-                    "sonyluz@bne.com.br",
-                    Convert.ToDateTime("1990-11-18T21:17:51.763Z")
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-
+           return _context.Customers.FirstOrDefault(x => x.Email == email);
         }
 
         public Customer GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Customers.Find(id);
         }
 
         public void Register(Customer customerViewModel)
         {
-            throw new NotImplementedException();
+            Add(customerViewModel);
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var customer = GetById(id);
+            base.Remove(customer);
         }
 
         public void Update(Customer customerViewModel)
         {
-            throw new NotImplementedException();
+            base.Update(customerViewModel);
         }
     }
 }

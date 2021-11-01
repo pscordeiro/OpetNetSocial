@@ -4,11 +4,12 @@ namespace OpetNet.Domain.Models
 {
     public class Customer
     {
-        public Customer(Guid id, string name, string email, DateTime birthDate)
+        public Customer(Guid id, string name, string email, DateTime birthDate, string passWord)
         {
             Id = id;
             Name = name;
             Email = email;
+            PassWord = passWord;
             BirthDate = birthDate;
         }
 
@@ -19,6 +20,7 @@ namespace OpetNet.Domain.Models
         public string Name { get; private set; }
 
         public string Email { get; private set; }
+        public string PassWord { get; private set; }
 
         public DateTime BirthDate { get; private set; }
     }

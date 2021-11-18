@@ -66,7 +66,7 @@ namespace OpetNet.Infra.CrossCutting.IoC
 
             // Infra - Data
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = "configuration.GetConnectionString(DefaultConnection)";
             services.AddScoped<IDbConnection>(s => new SqlConnection(connectionString));
             services.AddScoped<IUnitOfWorkAdo, UnitOfWork>();
             services.AddScoped<IUnitOfWork>(s => s.GetService<IUnitOfWorkAdo>());

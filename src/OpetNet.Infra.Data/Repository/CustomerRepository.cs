@@ -13,6 +13,10 @@ namespace OpetNet.Infra.Data.Repository
 
         }
 
+        public Customer GetByEmailAndPassWord(string email, string passWord)
+        {
+            return _context.Customers.FirstOrDefault(x => x.Email == email);
+        }
         public Customer GetByEmail(string email)
         {
            return _context.Customers.FirstOrDefault(x => x.Email == email);

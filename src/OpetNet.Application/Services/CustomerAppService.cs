@@ -7,6 +7,7 @@ using OpetNet.Domain.Commands;
 using OpetNet.Domain.Core.Bus;
 using OpetNet.Domain.Interfaces;
 using log4net;
+using OpetNet.Domain.Models;
 
 namespace OpetNet.Application.Services
 {
@@ -35,7 +36,14 @@ namespace OpetNet.Application.Services
 
             return _mapper.Map<CustomerViewModel>(_customerRepository.GetById(id));
         }
-
+        public CustomerViewModel GetByEmailAndPassWord(string email, string passWord)
+        {
+            return _mapper.Map<CustomerViewModel>(_customerRepository.GetByEmail(email));
+        }
+        public CustomerViewModel GetByEmail(string email)
+        {
+           return _mapper.Map<CustomerViewModel>(_customerRepository.GetByEmail(email));
+        }
         public void Register(CustomerViewModel customerViewModel)
         {
             _log.Debug("Register");

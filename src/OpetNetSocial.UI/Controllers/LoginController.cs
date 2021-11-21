@@ -7,6 +7,7 @@ using OpetNetSocial.UI.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace OpetNetSocial.UI.Controllers
 {
@@ -40,6 +41,12 @@ namespace OpetNetSocial.UI.Controllers
         {
             _customerAppService.Register(customerViewModel);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

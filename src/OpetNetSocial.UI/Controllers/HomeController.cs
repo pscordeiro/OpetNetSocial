@@ -33,10 +33,13 @@ namespace OpetNetSocial.UI.Controllers
         }
         public IActionResult CreatePost(PostViewModel postViewModel)
         {
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
             postViewModel.CustomerId = Guid.Parse(User.FindFirst("Id").Value);
             Console.WriteLine("USE ID " + postViewModel.CustomerId);
             _postAppService.Register(postViewModel);
-            return View(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()

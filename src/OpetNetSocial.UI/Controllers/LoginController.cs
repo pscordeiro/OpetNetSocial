@@ -22,7 +22,24 @@ namespace OpetNetSocial.UI.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Home", "Index");
+            }
+
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(CustomerViewModel customerViewModel)
+        {
+            _customerAppService.Register(customerViewModel);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -35,7 +52,7 @@ namespace OpetNetSocial.UI.Controllers
             }
             CustomerViewModel usuario = _customerAppService.GetByEmailAndPassWord(login_DTO.Email, login_DTO.PassWord);
 
-            if(usuario is null)
+            if (usuario is null)
             {
                 ViewBag.Erro = "Usuario ou senha incorretos";
                 return View();
@@ -43,7 +60,7 @@ namespace OpetNetSocial.UI.Controllers
 
 
             Login(usuario);
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
         private async void Login(CustomerViewModel usuario)
         {

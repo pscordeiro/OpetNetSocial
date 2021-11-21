@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpetNet.Infra.CrossCutting.IoC;
 using MediatR;
+using System;
 
 namespace OpetNet.EventListeners
 {
@@ -25,7 +26,6 @@ namespace OpetNet.EventListeners
                     config.AddCommandLine(args);
                 }
             });
-
             builder.ConfigureServices((hostingContext, services) =>
             {
                 services.RegisterServices(hostingContext.Configuration);

@@ -1,0 +1,33 @@
+﻿@model OpetNet.Application.ViewModels.CustomerViewModel
+
+<h3 style="text-align:center">Criar novo usuario</h3>
+
+<form asp-action="Create" asp-controller="Login" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" placeholder="Email..." />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="PassWord"></label>
+            <input asp-for="PassWord" class="form-control" placeholder="Senha" />
+            <span asp-validation-for="PassWord" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="Nome do usuário" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <button type="submit" class="btn btn-success">Criar conta</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

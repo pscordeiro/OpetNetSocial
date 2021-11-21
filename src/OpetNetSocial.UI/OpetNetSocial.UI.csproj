@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpetNet.Application\OpetNet.Application.csproj" />
+    <ProjectReference Include="..\OpetNet.Infra.CrossCutting.IoC\OpetNet.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\OpetNet.Infra.Data\OpetNet.Infra.Data.csproj" />
   </ItemGroup>
 

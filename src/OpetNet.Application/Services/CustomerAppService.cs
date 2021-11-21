@@ -15,24 +15,17 @@ namespace OpetNet.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepository;
-        private readonly IMediatorHandler Bus;
-        private readonly ILog _log;
 
         public CustomerAppService(IMapper mapper,
-                                  ICustomerRepository customerRepository,
-                                  IMediatorHandler bus,
-            ILog log)
+                                  ICustomerRepository customerRepository)
         {
             _mapper = mapper;
             _customerRepository = customerRepository;
-            Bus = bus;
-            _log = log;
         }
 
 
         public CustomerViewModel GetById(Guid id)
         {
-            _log.Debug("GetById");
 
             return _mapper.Map<CustomerViewModel>(_customerRepository.GetById(id));
         }
@@ -46,22 +39,18 @@ namespace OpetNet.Application.Services
         }
         public void Register(CustomerViewModel customerViewModel)
         {
-            _log.Debug("Register");
-
-            var registerCommand = _mapper.Map<RegisterNewCustomerCommand>(customerViewModel);
-            Bus.SendCommand(registerCommand);
+            var customer = _mapper.Map<CustomerViewModel, Customer>(customerViewModel);
+            _customerRepository.Register(customer);
         }
 
         public void Update(CustomerViewModel customerViewModel)
         {
             var updateCommand = _mapper.Map<UpdateCustomerCommand>(customerViewModel);
-            Bus.SendCommand(updateCommand);
         }
 
         public void Remove(Guid id)
         {
             var removeCommand = new RemoveCustomerCommand(id);
-            Bus.SendCommand(removeCommand);
         }
 
         public IEnumerable<CustomerViewModel> GetAll()

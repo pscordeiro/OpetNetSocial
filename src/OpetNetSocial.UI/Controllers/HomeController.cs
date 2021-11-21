@@ -16,6 +16,11 @@ namespace OpetNetSocial.UI.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("HomeLogado");
+            }
+
             return View();
         }
 

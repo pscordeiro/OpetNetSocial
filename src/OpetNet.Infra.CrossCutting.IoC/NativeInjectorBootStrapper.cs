@@ -41,8 +41,11 @@ namespace OpetNet.Infra.CrossCutting.IoC
             // ASP.NET HttpContext dependency
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddAutoMapper();
-            AutoMapperConfig.RegisterMappings();
+            services.AddAutoMapper(typeof(DomainToViewModelMappingProfile));
+            services.AddAutoMapper(typeof(ViewModelToDomainMappingProfile));
+            services.AddAutoMapper(typeof(EventToCommand));
+
+            //AutoMapperConfig.RegisterMappings();
 
             // Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, InMemoryBus>();
@@ -51,7 +54,7 @@ namespace OpetNet.Infra.CrossCutting.IoC
             services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
 
             // Application
-            services.AddScoped<ICustomerAppService, CustomerAppService>();
+            //services.AddScoped<ICustomerAppService, CustomerAppService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
@@ -65,7 +68,7 @@ namespace OpetNet.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<RemoveCustomerCommand, Unit>, CustomerCommandHandler>();
 
             // Infra - Data
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            //services.AddScoped<ICustomerRepository, CustomerRepository>();
             var connectionString = "configuration.GetConnectionString(DefaultConnection)";
             services.AddScoped<IDbConnection>(s => new SqlConnection(connectionString));
             services.AddScoped<IUnitOfWorkAdo, UnitOfWork>();

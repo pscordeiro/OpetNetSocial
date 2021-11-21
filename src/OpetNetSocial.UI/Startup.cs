@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpetNet.Infra.Data.Context;
+using OpetNet.Infra.CrossCutting.IoC;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace OpetNetSocial.UI
 {
@@ -20,9 +22,12 @@ namespace OpetNetSocial.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseInMemoryDatabase("teste"));
+            services.AddInfrastructure().AddDomain().AddApplication().AddService();
             services.AddControllersWithViews();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/Login/Index");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +47,7 @@ namespace OpetNetSocial.UI
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

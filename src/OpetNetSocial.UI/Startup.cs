@@ -24,7 +24,7 @@ namespace OpetNetSocial.UI
         {
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseInMemoryDatabase("teste"));
+            options.UseSqlServer(Configuration.GetConnectionString("Base")));
             services.AddInfrastructure().AddDomain().AddApplication().AddService();
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/Login/Index");

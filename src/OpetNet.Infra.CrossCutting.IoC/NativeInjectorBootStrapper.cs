@@ -1,11 +1,13 @@
-using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 using AutoMapper;
+using log4net;
+using log4net.Config;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using OpetNet.Application.AutoMapper;
-using OpetNet.Application.Interfaces;
-using OpetNet.Application.Services;
 using OpetNet.Domain.CommandHandlers;
 using OpetNet.Domain.Commands;
 using OpetNet.Domain.Core.Bus;
@@ -17,20 +19,15 @@ using OpetNet.Infra.CrossCutting.Bus;
 using OpetNet.Infra.CrossCutting.Identity.Authorization;
 using OpetNet.Infra.CrossCutting.Identity.Models;
 using OpetNet.Infra.CrossCutting.Identity.Services;
-using OpetNet.Infra.Data.Repository;
 using OpetNet.Infra.Data.UoW;
-using log4net;
-using log4net.Config;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using SharedKernel.DomainEvents.CrossDomainEvents;
 using SharedKernel.DomainEvents.CrossDomainEvents.Configuration;
 using SharedKernel.DomainEvents.CrossDomainEvents.Interfaces;
 using SharedKernel.Logger;
 using SharedKernel.Logger.Interfaces;
+using System;
+using System.Data;
+using System.IO;
 
 namespace OpetNet.Infra.CrossCutting.IoC
 {

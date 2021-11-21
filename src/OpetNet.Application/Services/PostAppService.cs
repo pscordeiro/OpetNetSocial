@@ -5,6 +5,7 @@ using OpetNet.Domain.Interfaces;
 using OpetNet.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace OpetNet.Application.Services
 {
@@ -24,6 +25,7 @@ namespace OpetNet.Application.Services
 
         public void Register(PostViewModel postViewModel)
         {
+            postViewModel.Mensagem = Regex.Replace(postViewModel.Mensagem, @"<.*>", "").ToString();
             _postRepository.Register(_mapper.Map<Post>(postViewModel));
         }
     }

@@ -1,5 +1,6 @@
 using OpetNet.Domain.Models;
 using System;
+using System.Collections.Generic;
 
 namespace OpetNet.Domain.Interfaces
 {
@@ -11,5 +12,6 @@ namespace OpetNet.Domain.Interfaces
         void Update(Customer customerViewModel);
         void Remove(Guid id);
         void Register(Customer customerViewModel);
+        IEnumerable<Customer> GetFriendshipSuggestion(Guid customerId, int take = 10);
     }
 }

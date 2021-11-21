@@ -73,7 +73,7 @@ namespace OpetNetSocial.UI.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, usuario.Email),
+                new Claim(ClaimTypes.Name, usuario.Name),
                 new Claim(ClaimTypes.Role, "Usuario_Comum"),
                 new Claim(ClaimTypes.Email, usuario.Email),
                 new Claim("Id", usuario.Id.ToString())

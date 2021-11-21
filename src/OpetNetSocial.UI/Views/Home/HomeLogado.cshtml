@@ -1,9 +1,9 @@
 ﻿@using OpetNet.Application.ViewModels
 
-
+<h5>Olá @User.Identity.Name</h5>
 <partial name="~/Views/Home/Post/_CreatePost.cshtml" />
 
-@if (ViewBag.PostsRecentes != null)
+@if (ViewBag.PostsRecentes.Count != 0)
 {
     @foreach (PostViewModel post in ViewBag.PostsRecentes)
     {
@@ -13,4 +13,13 @@
         <h5>-------------------------------------------------------</h5>
     }
 
+
+
+
 }
+else
+{
+    <h1>Adicione novos amigos </h1>
+}
+
+@await Html.PartialAsync("~/Views/Home/_SujestaoDeAmizades.cshtml", (IEnumerable<CustomerViewModel>)ViewBag.SujestaoDeAmizades);

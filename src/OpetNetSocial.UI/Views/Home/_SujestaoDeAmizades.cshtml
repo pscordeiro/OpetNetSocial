@@ -1,0 +1,10 @@
+﻿@using OpetNet.Application.ViewModels
+@model IEnumerable<CustomerViewModel>
+
+
+<ul class="list-group">
+    @foreach (CustomerViewModel customer in Model)
+    {
+        <li class="list-group-item">@customer.Name <button class="btn btn-primary">Adicionar</button></li>
+    }
+</ul>

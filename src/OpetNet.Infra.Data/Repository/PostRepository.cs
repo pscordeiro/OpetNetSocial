@@ -10,15 +10,15 @@ namespace OpetNet.Infra.Data.Repository
 {
     public class PostRepository : BaseRepository<Post>, IPostRepository
     {
-        public PostRepository(ApplicationDbContext dbContext) : base(dbContext)
+        private readonly IAmizadesRepository _amizadesRepository;
+        public PostRepository(ApplicationDbContext dbContext, IAmizadesRepository amizadesRepository) : base(dbContext)
         {
-
+            _amizadesRepository = amizadesRepository;
         }
 
         public IEnumerable<Post> GetRecentPost(Guid idUsuario)
         {
-            var listaAmigosUsuario = _context.Amizades.Where(x => x.IdUsuario == idUsuario)
-                .Select(x=> x.IdAmigo).ToList();
+            var listaAmigosUsuario = _amizadesRepository.GetTheFriends(idUsuario).Select(x => x.IdAmigo);
 
             return _context.Posts.Include(x => x.Customer)
                 .Where(x => listaAmigosUsuario.Contains(x.CustomerId) || x.CustomerId == idUsuario)

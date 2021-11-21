@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
 using AutoMapper;
 using OpetNet.Application.Interfaces;
 using OpetNet.Application.ViewModels;
 using OpetNet.Domain.Commands;
-using OpetNet.Domain.Core.Bus;
 using OpetNet.Domain.Interfaces;
-using log4net;
 using OpetNet.Domain.Models;
+using System;
+using System.Collections.Generic;
 
 namespace OpetNet.Application.Services
 {
@@ -42,7 +40,10 @@ namespace OpetNet.Application.Services
             var customer = _mapper.Map<CustomerViewModel, Customer>(customerViewModel);
             _customerRepository.Register(customer);
         }
-
+        public IEnumerable<CustomerViewModel> GetFriendshipSuggestion(Guid customerId, int take = 10)
+        {
+            return _mapper.Map<IEnumerable<CustomerViewModel>>(_customerRepository.GetFriendshipSuggestion(customerId, take));
+        }
         public void Update(CustomerViewModel customerViewModel)
         {
             var updateCommand = _mapper.Map<UpdateCustomerCommand>(customerViewModel);
@@ -57,5 +58,6 @@ namespace OpetNet.Application.Services
         {
             throw new NotImplementedException();
         }
+
     }
 }

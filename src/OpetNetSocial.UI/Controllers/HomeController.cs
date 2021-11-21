@@ -25,7 +25,10 @@ namespace OpetNetSocial.UI.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ViewBag.PostsRecentes = _postAppService.GetRecentPost(Guid.Parse(User.FindFirst("Id").Value));
+                Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
+
+                ViewBag.SujestaoDeAmizades = _customerAppService.GetFriendshipSuggestion(customerId);
+                ViewBag.PostsRecentes = _postAppService.GetRecentPost(customerId);
                 return View("HomeLogado");
             }
 
@@ -37,7 +40,6 @@ namespace OpetNetSocial.UI.Controllers
                 return RedirectToAction("Index");
 
             postViewModel.CustomerId = Guid.Parse(User.FindFirst("Id").Value);
-            Console.WriteLine("USE ID " + postViewModel.CustomerId);
             _postAppService.Register(postViewModel);
             return RedirectToAction("Index");
         }

@@ -21,7 +21,9 @@ namespace OpetNet.Infra.Data.Repository
                 .Select(x=> x.IdAmigo).ToList();
 
             return _context.Posts.Include(x => x.Customer)
-                .Where(x => listaAmigosUsuario.Contains(x.CustomerId) || x.CustomerId == idUsuario).ToList();
+                .Where(x => listaAmigosUsuario.Contains(x.CustomerId) || x.CustomerId == idUsuario)
+                .Take(10)
+                .OrderByDescending(x => x.DataPublicacao).ToList();
         }
         public void Register(Post post)
         {

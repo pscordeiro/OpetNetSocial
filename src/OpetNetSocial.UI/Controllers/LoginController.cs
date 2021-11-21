@@ -69,7 +69,7 @@ namespace OpetNetSocial.UI.Controllers
                 new Claim(ClaimTypes.Name, usuario.Email),
                 new Claim(ClaimTypes.Role, "Usuario_Comum"),
                 new Claim(ClaimTypes.Email, usuario.Email),
-                new Claim(ClaimTypes.SerialNumber, usuario.Id.ToString())
+                new Claim("Id", usuario.Id.ToString())
             };
 
             var identidadeDeUsuario = new ClaimsIdentity(claims, "Email");

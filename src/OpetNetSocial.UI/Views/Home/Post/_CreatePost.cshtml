@@ -1,0 +1,14 @@
+﻿@model OpetNet.Application.ViewModels.PostViewModel
+
+<form asp-action="CreatePost" asp-controller="Home" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col">
+            <input asp-for="Mensagem" class="form-control" placeholder="O que deseja escrever?" />
+            <span asp-validation-for="Mensagem" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <button type="submit" class="btn btn-success">Publicar</button>
+    </div>
+</form>

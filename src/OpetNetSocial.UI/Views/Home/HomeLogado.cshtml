@@ -1,1 +1,16 @@
-﻿<h1>Voce esta logado</h1>
+﻿@using OpetNet.Application.ViewModels
+
+
+<partial name="~/Views/Home/Post/_CreatePost.cshtml" />
+
+@if (ViewBag.PostsRecentes != null)
+{
+    @foreach (PostViewModel post in ViewBag.PostsRecentes)
+    {
+        <h5>-------------------------------------------------------</h5>
+        <h4>@post.Customer.Name - Publicado em @post.DataPublicacao</h4>
+        <p>@post.Mensagem</p>
+        <h5>-------------------------------------------------------</h5>
+    }
+
+}

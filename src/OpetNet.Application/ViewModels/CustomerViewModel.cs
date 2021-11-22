@@ -29,5 +29,7 @@ namespace OpetNet.Application.ViewModels
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
         [DisplayName("Birth Date")]
         public DateTime BirthDate { get; set; }
+        public string UrlImgProfile { get; set; }
+        public string UrlProfile { get; set; }
     }
 }

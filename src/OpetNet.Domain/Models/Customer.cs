@@ -23,5 +23,7 @@ namespace OpetNet.Domain.Models
         public string PassWord { get; private set; }
 
         public DateTime BirthDate { get; private set; }
+        public string UrlImgProfile { get; set; }
+        public string UrlProfile { get; set; }
     }
 }

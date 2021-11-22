@@ -40,6 +40,9 @@ namespace OpetNet.Application.Services
         }
         public void Register(CustomerViewModel customerViewModel)
         {
+            int randomNumber = new Random().Next(1, 6);
+
+            customerViewModel.UrlImgProfile = string.Concat("https://bootdey.com/img/Content/avatar/avatar", randomNumber, ".png");
             var customer = _mapper.Map<CustomerViewModel, Customer>(customerViewModel);
             _customerRepository.Register(customer);
         }

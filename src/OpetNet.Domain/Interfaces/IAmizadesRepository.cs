@@ -8,5 +8,6 @@ namespace OpetNet.Domain.Interfaces
     {
         IEnumerable<Amizades> GetTheFriends(Guid customerId, int take = 10);
         IEnumerable<Amizades> GetTheUnfriends(Guid customerId, int take = 10);
+        void Register(Amizades amizades);
     }
 }

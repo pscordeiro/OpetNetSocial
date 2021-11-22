@@ -13,12 +13,15 @@ namespace OpetNet.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepository;
+        private readonly IAmizadesRepository _amizadesRepository;
 
         public CustomerAppService(IMapper mapper,
-                                  ICustomerRepository customerRepository)
+                                  ICustomerRepository customerRepository,
+                                  IAmizadesRepository amizadesRepository)
         {
             _mapper = mapper;
             _customerRepository = customerRepository;
+            _amizadesRepository = amizadesRepository;
         }
 
 
@@ -47,6 +50,15 @@ namespace OpetNet.Application.Services
         public void Update(CustomerViewModel customerViewModel)
         {
             var updateCommand = _mapper.Map<UpdateCustomerCommand>(customerViewModel);
+        }
+        public void AddFriend(Guid custumerId, Guid friendId)
+        {
+            var primeiroRelacionamento = new Amizades { IdUsuario = custumerId, IdAmigo = friendId };
+            var segundoRelacionamento = new Amizades { IdUsuario = friendId, IdAmigo = custumerId };
+
+            _amizadesRepository.Register(primeiroRelacionamento);
+            _amizadesRepository.Register(segundoRelacionamento);
+
         }
 
         public void Remove(Guid id)

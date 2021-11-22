@@ -12,6 +12,8 @@ namespace OpetNet.Application.Interfaces
         CustomerViewModel GetByEmailAndPassWord(string email, string passWord);
         CustomerViewModel GetById(Guid id);
         IEnumerable<CustomerViewModel> GetFriendshipSuggestion(Guid customerId, int take = 10);
+        public void AddFriend(Guid consumerId, Guid friendId);
+
         void Update(CustomerViewModel customerViewModel);
         void Remove(Guid id);
     }

@@ -16,6 +16,7 @@ namespace OpetNet.Infra.Data.Repository
 
         public IEnumerable<Amizades> GetTheFriends(Guid customerId, int take = 10)
         {
+
             return _context.Amizades.Where(x => x.IdUsuario == customerId).Take(take).ToList();
         }
 
@@ -23,5 +24,9 @@ namespace OpetNet.Infra.Data.Repository
         {
             return _context.Amizades.Where(x => x.IdUsuario != customerId).Take(take).ToList();
         }
+        public void Register(Amizades amizades)
+        {
+            Add(amizades);
+        } 
     }
 }

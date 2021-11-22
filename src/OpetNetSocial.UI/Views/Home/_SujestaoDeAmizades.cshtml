@@ -5,6 +5,9 @@
 <ul class="list-group">
     @foreach (CustomerViewModel customer in Model)
     {
-        <li class="list-group-item">@customer.Name <button class="btn btn-primary">Adicionar</button></li>
+        <li class="list-group-item">
+            @customer.Name
+            <a class="btn btn-primary" href="@Url.Action("AddFriend","Interactions", new {friendId = customer.Id })">Adicionar</a>
+        </li>
     }
 </ul>

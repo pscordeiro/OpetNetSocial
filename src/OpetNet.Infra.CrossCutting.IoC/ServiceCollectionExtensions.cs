@@ -33,6 +33,7 @@ namespace OpetNet.Infra.CrossCutting.IoC
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IAmizadesRepository, AmizadesRepository>();
+            services.AddScoped<IPostsCurtidosRepository, PostsCurtidosRepository>();
 
             return services;
         }

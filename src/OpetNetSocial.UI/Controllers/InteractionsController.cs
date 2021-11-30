@@ -8,10 +8,12 @@ namespace OpetNetSocial.UI.Controllers
     public class InteractionsController : Controller
     {
         private readonly ICustomerAppService _customerAppService;
+        private readonly IPostAppService _postAppService;
 
-        public InteractionsController(ICustomerAppService customerAppService)
+        public InteractionsController(ICustomerAppService customerAppService, IPostAppService postAppService)
         {
             _customerAppService = customerAppService;
+            _postAppService = postAppService;
         }
 
         public async Task<IActionResult> AddFriend(Guid friendId)
@@ -22,9 +24,10 @@ namespace OpetNetSocial.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> LikeAPost(int idPost)
+        public async Task LikeAPost(int postId)
         {
-            return Ok();
+            Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
+             _postAppService.RegisterLikeInPost(customerId, postId);
         }
     }
 }

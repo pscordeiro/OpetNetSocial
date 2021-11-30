@@ -12,5 +12,6 @@ namespace OpetNet.Domain.Models
         public DateTime DataPublicacao { get; set; }
         public DateTime ModifiedDate { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual PostsCurtidos PostsCurtidos { get; set; }
     }
 }

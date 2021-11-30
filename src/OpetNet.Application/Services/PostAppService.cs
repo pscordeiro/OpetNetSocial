@@ -13,10 +13,13 @@ namespace OpetNet.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IPostRepository _postRepository;
-        public PostAppService(IPostRepository postRepository, IMapper mapper)
+        private readonly IPostsCurtidosRepository _postsCurtidosRepository;
+        public PostAppService(IPostRepository postRepository, IMapper mapper,
+            IPostsCurtidosRepository postsCurtidosRepository)
         {
             _mapper = mapper;
             _postRepository = postRepository;
+            _postsCurtidosRepository = postsCurtidosRepository;
         }
         public IEnumerable<PostViewModel> GetRecentPost(Guid idUsuario)
         {
@@ -27,6 +30,10 @@ namespace OpetNet.Application.Services
         {
             postViewModel.Mensagem = Regex.Replace(postViewModel.Mensagem, @"<.*>", "").ToString();
             _postRepository.Register(_mapper.Map<Post>(postViewModel));
+        }
+        public void RegisterLikeInPost(Guid customerId, int postId)
+        {
+            _postsCurtidosRepository.Register(new PostsCurtidos { CustomerId = customerId, PostId = postId });
         }
     }
 }

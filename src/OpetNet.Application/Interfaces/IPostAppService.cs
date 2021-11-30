@@ -13,5 +13,6 @@ namespace OpetNet.Application.Interfaces
         /// <returns></returns>
         IEnumerable<PostViewModel> GetRecentPost(Guid idUsuario);
         void Register(PostViewModel postViewModel);
+        public void RegisterLikeInPost(Guid customerId, int postId);
     }
 }

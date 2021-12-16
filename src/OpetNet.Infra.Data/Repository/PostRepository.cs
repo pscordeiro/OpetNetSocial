@@ -20,8 +20,8 @@ namespace OpetNet.Infra.Data.Repository
         {
             var listaAmigosUsuario = _amizadesRepository.GetTheFriends(idUsuario).Select(x => x.IdAmigo);
 
-            return _context.Posts.Include(x => x.Customer).Include(x => x.PostsCurtidos)
-                .Where(x => listaAmigosUsuario.Contains(x.CustomerId) || x.CustomerId == idUsuario || x.PostsCurtidos.CustomerId == idUsuario)
+            return _context.Posts.Include(x => x.Customer)
+                .Where(x => listaAmigosUsuario.Contains(x.CustomerId) || x.CustomerId == idUsuario)
                 .OrderByDescending(x => x.DataPublicacao).Take(10).ToList();
         }
         public void Register(Post post)

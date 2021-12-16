@@ -23,7 +23,12 @@ namespace OpetNet.Application.Services
         }
         public IEnumerable<PostViewModel> GetRecentPost(Guid idUsuario)
         {
-            return _mapper.Map<IEnumerable<PostViewModel>>(_postRepository.GetRecentPost(idUsuario));
+            var listaParaEditar = _mapper.Map<List<PostViewModel>>(_postRepository.GetRecentPost(idUsuario));
+            foreach (var post in listaParaEditar)
+            {
+                post.Liked = _postsCurtidosRepository.ConsumerLiked(idUsuario, post.Id);
+            }
+            return listaParaEditar;
         }
 
         public void Register(PostViewModel postViewModel)

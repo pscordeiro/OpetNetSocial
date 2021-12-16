@@ -61,7 +61,6 @@ namespace OpetNet.Application.Services
 
             _amizadesRepository.Register(primeiroRelacionamento);
             _amizadesRepository.Register(segundoRelacionamento);
-
         }
 
         public void Remove(Guid id)

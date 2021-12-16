@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace OpetNet.Domain.Models
+namespace OpetNet.Application.ViewModels
 {
-    public class PostsCurtidos
+    public class PostCurtidosViewlModel
     {
         public int Id { get; set; }
         public Guid CustomerId { get; set; }
         public int PostId { get; set; }
-        public Post Post { get; set; }
+
     }
 }

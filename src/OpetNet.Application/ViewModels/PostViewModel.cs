@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OpetNet.Application.ViewModels
 {
@@ -13,7 +15,9 @@ namespace OpetNet.Application.ViewModels
         public string Mensagem { get; set; }
         public DateTime DataPublicacao { get; set; } = DateTime.Now;
         public DateTime ModifiedDate { get; set; } = DateTime.Now;
-        public bool Liked { get; set; }
+        public bool Liked { get; set; } 
+
         public virtual CustomerViewModel Customer { get; set; }
+        public virtual ICollection<PostCurtidosViewlModel> PostCurtidos { get; set; }
     }
 }

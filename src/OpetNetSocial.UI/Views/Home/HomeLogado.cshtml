@@ -9,7 +9,7 @@
     <div class="col-md-7">
         @foreach (PostViewModel post in ViewBag.PostsRecentes)
         {
-          
+
             <div class="social-feed-box">
                 <!--<div class="pull-right social-action dropdown">
                     <button data-toggle="dropdown" class="dropdown-toggle btn-white">
@@ -22,7 +22,7 @@
 
                 <div class="social-avatar">
                     <a href="#" class="pull-left">
-                        <img alt="img profile" src="@post.Customer.UrlImgProfile"/>
+                        <img alt="img profile" src="@post.Customer.UrlImgProfile" />
                     </a>
                     <div class="media-body">
                         <a href="#">
@@ -35,7 +35,14 @@
                     <p>@post.Mensagem</p>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Curtir!</button>
+                    @if (post.Liked)
+                    {
+                        <button class="btn btn-white btn-xs" id="@post.Id"><i class="fa fa-thumbs-up curtiuAzul"></i> Curtiu!</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-white btn-xs" id="@post.Id" onclick="CurtirPost(@post.Id)"><i class="fa fa-thumbs-up"></i> Curtir!</button>
+                    }
                     <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comentar!</button>
                 </div>
             </div>
@@ -50,6 +57,17 @@ else
 
 @await Html.PartialAsync("~/Views/Home/_SujestaoDeAmizades.cshtml", (IEnumerable<CustomerViewModel>)ViewBag.SujestaoDeAmizades)
 
+<script>
+    function CurtirPost(idPost) {
+        fetch('/Interactions/LikeAPost/?postId=' + idPost);
+        var postCurtido = document.getElementById(idPost);
+        postCurtido.innerHTML = '<i class="fa fa-thumbs-up curtiuAzul"></i> Curtiu!';
+    }
+
+    function DescurtirPost(idPost) {
+
+    }
+</script>
 
 <style>
     body {
@@ -223,5 +241,9 @@ else
         font-size: 90%;
         background: #ffffff;
         padding: 10px 15px;
+    }
+
+    .curtiuAzul {
+        color: cornflowerblue;
     }
 </style>

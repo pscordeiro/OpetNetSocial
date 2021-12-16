@@ -26,8 +26,12 @@ namespace OpetNetSocial.UI.Controllers
 
         public async Task LikeAPost(int postId)
         {
-            Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
-             _postAppService.RegisterLikeInPost(customerId, postId);
+            try
+            {
+                Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
+                _postAppService.RegisterLikeInPost(customerId, postId);
+            }
+            catch { }
         }
     }
 }

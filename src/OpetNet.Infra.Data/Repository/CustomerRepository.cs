@@ -28,6 +28,11 @@ namespace OpetNet.Infra.Data.Repository
             var listfriends = _amizadesRepository.GetTheFriends(customerId, take).Select(x => x.IdAmigo).ToList();
             return _context.Customers.Where(x => !listfriends.Contains(x.Id) && x.Id != customerId).Take(take).ToList();
         }
+        public IEnumerable<Customer> GetFriends(Guid customerId)
+        {
+            var listFriends = _amizadesRepository.GetTheFriends(customerId, 6).Select(x => x.IdAmigo);
+            return _context.Customers.Where(x => listFriends.Contains(x.Id)).ToList();
+        }
 
         public Customer GetById(Guid id)
         {

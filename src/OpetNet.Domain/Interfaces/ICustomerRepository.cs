@@ -13,5 +13,7 @@ namespace OpetNet.Domain.Interfaces
         void Remove(Guid id);
         void Register(Customer customerViewModel);
         IEnumerable<Customer> GetFriendshipSuggestion(Guid customerId, int take = 10);
+        IEnumerable<Customer> GetFriends(Guid customerId);
+
     }
 }

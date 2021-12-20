@@ -18,20 +18,25 @@ namespace OpetNetSocial.UI.Controllers
 
         public async Task<IActionResult> AddFriend(Guid friendId)
         {
-            Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
-            _customerAppService.AddFriend(customerId, friendId);
-
+            if (User.Identity.IsAuthenticated)
+            {
+                Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
+                _customerAppService.AddFriend(customerId, friendId);
+            }
             return RedirectToAction("Index", "Home");
         }
 
         public async Task LikeAPost(int postId)
         {
-            try
+            if (User.Identity.IsAuthenticated)
             {
                 Guid customerId = Guid.Parse(User.FindFirst("Id").Value);
                 _postAppService.RegisterLikeInPost(customerId, postId);
             }
-            catch { }
+        }
+        public async Task UnLikePost(int postId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

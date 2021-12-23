@@ -18,6 +18,7 @@ namespace OpetNet.Infra.CrossCutting.IoC
         {
             services.AddTransient(typeof(ICustomerAppService), typeof(CustomerAppService));
             services.AddTransient(typeof(IPostAppService), typeof(PostAppService));
+            services.AddTransient(typeof(IUploadAppService), typeof(UploadAppService));
 
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile));
             services.AddAutoMapper(typeof(CustomerViewModelToCustomer));

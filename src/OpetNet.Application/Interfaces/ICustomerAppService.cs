@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using OpetNet.Application.ViewModels;
 
 namespace OpetNet.Application.Interfaces
@@ -17,6 +18,7 @@ namespace OpetNet.Application.Interfaces
         public void AddFriend(Guid consumerId, Guid friendId);
 
         void Update(CustomerViewModel customerViewModel);
+        void AtualizarFotoDoPerfil(Guid customerId, IFormFile formFile);
         void Remove(Guid id);
     }
 }

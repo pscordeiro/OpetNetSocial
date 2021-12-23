@@ -1,19 +1,17 @@
 ﻿@model OpetNet.Application.ViewModels.CustomerViewModel
 @using OpetNet.Application.ViewModels
 
-<p>Esta logado: @ViewData["apropria"]</p>
-
 <div class="container emp-profile">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="@Model.UrlImgProfile" alt="@Model.Name" />
+                    <img src="@Model.UrlImgProfile" alt="@Model.Name" id="imagem-perfil"/>
                     @if ((bool)ViewData["apropria"])
                     {
                         <div class="file btn btn-lg btn-primary">
                             Mudar foto
-                            <input type="file" name="file" />
+                            <input type="file" name="file" id="imgProfileSelect" accept="image/png, image/jpeg" />
                         </div>
                     }
                 </div>
@@ -89,6 +87,25 @@
         </div>
     </form>
 </div>
+<script>
+    const fileChooser = document.getElementById('imgProfileSelect');
+    fileChooser.onchange = e => {
+        const fileToUpload = e.target.files.item(0);
+        document.getElementById('imagem-perfil').src = URL.createObjectURL(fileToUpload);
+        const data = new FormData();
+        data.append('image', fileToUpload);
+
+        try {
+            fetch('/upload-imagem-profile',
+                {
+                    method: 'POST',
+                    body: data
+                })
+        } catch (e) {
+            console.log('teve um problema', e)
+        }
+    }
+</script>
 
 <style>
     .emp-profile {
@@ -206,14 +223,14 @@
         padding: 15px 15px 0 15px;
     }
 
-    .social-avatar img {
-        height: 40px;
-        width: 40px;
-        margin-right: 10px;
-    }
+        .social-avatar img {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+        }
 
-    .social-avatar .media-body a {
-        font-size: 14px;
-        display: block;
-    }
+        .social-avatar .media-body a {
+            font-size: 14px;
+            display: block;
+        }
 </style>

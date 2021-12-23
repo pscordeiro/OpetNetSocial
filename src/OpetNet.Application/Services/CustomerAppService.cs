@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using OpetNet.Application.Interfaces;
 using OpetNet.Application.ViewModels;
 using OpetNet.Domain.Commands;
@@ -17,16 +18,19 @@ namespace OpetNet.Application.Services
         private readonly ICustomerRepository _customerRepository;
         private readonly IAmizadesRepository _amizadesRepository;
         private readonly IBaseRepository<Customer> _baseRepository;
+        private readonly IUploadAppService _uploadAppService;
 
         public CustomerAppService(IMapper mapper,
                                   ICustomerRepository customerRepository,
                                   IAmizadesRepository amizadesRepository,
-                                  IBaseRepository<Customer> baseRepository)
+                                  IBaseRepository<Customer> baseRepository,
+                                  IUploadAppService uploadAppService)
         {
             _mapper = mapper;
             _customerRepository = customerRepository;
             _amizadesRepository = amizadesRepository;
             _baseRepository = baseRepository;
+            _uploadAppService = uploadAppService;
         }
 
         public CustomerViewModel GetForProfile(string urlProfile)
@@ -82,6 +86,20 @@ namespace OpetNet.Application.Services
         public void Remove(Guid id)
         {
             var removeCommand = new RemoveCustomerCommand(id);
+        }
+        public void AtualizarFotoDoPerfil(Guid customerId, IFormFile formFile)
+        {
+            string urlBlobDpsTiroDaqui = "https://opetnetsocialblobstorage.blob.core.windows.net/ftprfl/";
+
+            string extensaoArquivo = Regex.Replace(formFile.FileName, @"(.*\.)", "").ToString();
+            string nomeArquivo = string.Concat(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(),".",extensaoArquivo);
+            
+            var customer = _customerRepository.GetById(customerId);
+            customer.UrlImgProfile = urlBlobDpsTiroDaqui + nomeArquivo;
+            _customerRepository.Update(customer);
+
+            _uploadAppService.UploadImagemPerfil(formFile, nomeArquivo);
+
         }
 
         public IEnumerable<CustomerViewModel> GetAll()
